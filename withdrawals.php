@@ -69,11 +69,12 @@ include_once 'includes/header.php';
 										<td class="text-danger bg-warning" style="font-size: 12px;"><strong><?php echo $row['amount'] ?> €</strong></td>
 										
 										<td>
-											<a href="" data-toggle="modal" data-target="#confirm-payout-<?php echo $row['id'] ?>" class="btn btn-warning btn-sm" style="margin:0 2px"><span class="fa fa-money"></span>
 											
-											<a href="" data-toggle="modal" data-target="#confirm-status-<?php echo $row['status'] ?>" class="btn btn-info btn-sm" style="margin:0 2px"><span class="icon-note"></span>
+											<a href="" <?php if($row['status'] == 'completed') echo 'disabled';?> data-toggle="modal" data-target="#confirm-payout-<?php echo $row['id'] ?>" class="btn btn-warning btn-sm" style="margin:0 2px"><span class="fa fa-money"></span>
 											
-											<a href=""  class="btn btn-danger btn-sm delete_btn" data-toggle="modal" data-target="#confirm-delete-<?php echo $row['id'] ?>" style="margin:0 2px"><span class="icon-trash"></span>
+											<a href=""  data-toggle="modal" data-target="#confirm-status-<?php echo $row['status'] ?>" class="btn btn-info btn-sm" style="margin:0 2px"><span class="icon-note"></span>
+											
+											<a href="" <?php if($row['status'] == 'completed') echo 'disabled';?> class="btn btn-danger btn-sm delete_btn" data-toggle="modal" data-target="#confirm-delete-<?php echo $row['id'] ?>" style="margin:0 2px"><span class="icon-trash"></span>
 										</td>
 									</tr>
 
