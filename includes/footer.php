@@ -9,7 +9,7 @@
 	<script src="vendor/datatables/js/jquery.dataTables.js"></script>
     <script src="vendor/datatables-plugins/dataTables.bootstrap.js"></script>
     <script src="vendor/datatables-responsive/dataTables.responsive.js"></script>
-	
+	<script src="js/withdraw.js"></script>
 	<script>
     $('.tooltip').tooltip({
         selector: "[data-toggle=tooltip]",
