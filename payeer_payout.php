@@ -29,16 +29,26 @@ include_once 'includes/header.php';
                 require_once('./lib/cpayeer.php');
                 require_once './config/payeer-config.php';
 
+                if(!isset($_POST['withdrawal_id'])) {
+                  echo "Missing withdrawal id";
+                  exit;
+                }
+
                 $payeer = new CPayeer($accountNumber, $apiId, $apiKey);
                 if ($payeer->isAuth())
                 {
                   echo "You are successfully authorized<br>";
 
                   //print_r($_POST);
-                  echo "<br>";  
+                  //echo "<br>";  
                   $db->where('id', $_POST['withdrawal_id']);
                   //Get data to pre-populate the form.
                   $withdrawal = $db->getOne("withdrawals");
+
+                  if($withdrawal['status'] == 'completed') {
+                    echo "Already been processed";
+                    exit;
+                  }
 
                   $arTransfer = $payeer->transfer(array(
                     'curIn' => $currency,
@@ -56,6 +66,10 @@ include_once 'includes/header.php';
                   if (empty($arTransfer['errors']))
                   {
                     echo $arTransfer['historyId'].": Money transfer is successful";
+
+                    //Update the status
+                    $db->where('id',$_POST['withdrawal_id']);
+                    $stat = $db->update('withdrawals', array('status' => 'completed'));
                   }
                   else
                   {

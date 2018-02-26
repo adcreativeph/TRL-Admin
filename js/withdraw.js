@@ -17,7 +17,7 @@ $(function() {
       }
 
       if(payment_processor == 'ADV'){
-        $('#form-send-payment-'+wid).attr('action', "./send_adv/adv_sci_payout.php").submit();
+        $('#form-send-payment-'+wid).attr('action', "./adv_payout.php").submit();
       }      
 
   });
